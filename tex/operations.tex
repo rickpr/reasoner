@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{stmaryrd}
+
+\begin{document}
+
+\section{Classes}
+\begin{align*}
+  \mbox{course} &= \{\mbox{name, min\_hours, max\_hours}\} \\
+  \mbox{requirement} &= \{\mbox{name, min\_hours, max\_hours\, min\_grade,
+take,} \\ &\mbox{subrequirements: [Courses, Requirements]}\} \\
+\mbox{student\_course} &= \{\mbox{name, hours, grade}\} \\
+\mbox{wildcard} &= \{\mbox{code, match, min\_number, max\_number, min\_hours,
+exclude}\}
+\end{align*}
+
+\section{Operators}
+\begin{align*}
+  \mathcal{B}(R) &: \forall sub \in R_{subrequirements}, sub \colon \mbox{Course}
+  \\
+  S \simeq C &: S_{name} = C_{name} \\
+  \{S_1,\ldots,S_n\}\Cap R &: \left\{ s \mid s \in S, \exists c
+\in R_{sub} \colon s \simeq C, R_{min\_grade} \preceq S_{grade} \right\}, \mathcal{B}(R) \\
+|R| &: \sum_{sub \in R} sub_{hours}, \mathcal{B}(R) \\
+R_1 \merge R_2 &: \mbox{Requirement}(\mbox{max\_hours} = \min\{\min\{R_{1.hours},
+|R_{1.sub} \setminus R_{2.sub}|\} + \\  &\min\{R_{2.hours}, |R_{2.sub}
+\setminus R_{1.sub}|\} + \\ &|R_{1.sub} \cap R_{2.sub}|, R_{1.hours} + \\
+                            &R_{2.hours}\}, \\ &\mbox{subrequirements} =
+[R_{1.sub} \cup R_{2.sub}])
+\\
+\{S_1,\ldots,S_n\} \vdash R &: |\{S_1, \ldots, S_n\} \Cap R_{sub}| \geq
+R_{hours}, |\{S_1, \ldots, S_n\} \Cap R| \geq R_{take}, \mathcal{B}(R) \\
+\{S_1,\ldots,S_n\} \vdash R &: \merge_{sub \in R_{sub}} |\{S_1,\ldots,S_n\}
+\vdash sub| \merge \\
+& \mbox{Requirement}\left(\{S_1,\ldots,S_n\} \Cap \left\{sub
+\mid sub \in R_{sub}, sub \colon \mbox{Course} \right\}\right)
+\end{align*}
+\end{document}

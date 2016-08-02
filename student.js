@@ -1,23 +1,25 @@
+/* Student class
+ * Represents a student
+ * Attributes:
+ * name: String, name of the student (or alias)
+ * courses: Array, courses that students have taken
+ */
 class Student extends Base {
   constructor(name, courses) {
     this.name    = name;
     this.courses = courses;
   }
 
+  // Get the courses that are in common with a requirement
   cap(requirement) {
-    courses.filter(course => requirement.subrequirements.map(c => c.name).includes(course.name) && 
-        requirement.min_grade.preceq(course.grade));
+    return courses.filter(course => 
+        requirement.subrequirements.map(c => c.name).includes(course.name) && 
+        requirement.min_grade.preceq(course.grade)
+        );
   }
 
-  basic_vdash(requirement) {
-    intersection = cap(requirement.subrequirements);
-    return new CheckedRequirement(requirement.name, requirement.hours, requirement.subrequirements));
-  }
-
+  // Check if the student satisfied a requirement
   vdash(requirement) {
-    requirements = requirement.subrequirements.filter(requirement => requirement.type == 'Requirement');
-    courses = requirement.subrequirements.filter(requirement => requirement.type == 'Course');
-    satisfied_requirements = requirements.reduce((a, e) => a.merge(vdash(e)), Requirement.new('merge', 0, 0, 'F', 0, []));
-    satisfied_courses = cap(new Requirement('merge', 0, 0, 'F', 0, courses));
+    requirements.reduce((a, e) => a.merge(e), CheckedRequirement.new('merge', 0, 0, 'F', 0, []));
   }
 }

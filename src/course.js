@@ -4,8 +4,12 @@
  * min_hours: Minimum number of hours the course may provide
  * max_hours: Maximum number of hours the course may provide
  */
-class Course extends base {
+
+Base = require('./base.js');
+
+class Course extends Base {
   constructor(name, min_hours, max_hours) {
+    super();
     this.name      = name;
     this.min_hours = min_hours;
     this.max_hours = max_hours;
@@ -16,7 +20,7 @@ class Course extends base {
    * is satisfied.
    */
   vdash(student) {
-    if !(student_course = student.courses.find(course => course.simeq(this)))
+    if(!(student_course = student.courses.find(course => course.simeq(this))))
       return this.satisfied = false;
     this.hours     = student_course.hours;
     this.grade     = student_course.grade;
@@ -25,3 +29,5 @@ class Course extends base {
   }
 
 }
+
+module.exports = Course;

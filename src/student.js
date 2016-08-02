@@ -4,8 +4,12 @@
  * name: String, name of the student (or alias)
  * courses: Array, courses that students have taken
  */
+
+Base = require("./base.js");
+
 class Student extends Base {
   constructor(name, courses) {
+    super();
     this.name    = name;
     this.courses = courses;
   }
@@ -25,3 +29,5 @@ class Student extends Base {
     );
   }
 }
+
+module.exports = Student

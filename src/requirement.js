@@ -8,8 +8,11 @@
  * subrequirements: Array of subrequirements (Requirements and Courses).
  */
 
+Base = require("./base.js");
+
 class Requirement extends Base {
   constructor(name, min_hours, max_hours, min_grade, take, subrequirements) {
+    super();
     this.name            = name;
     this.min_hours       = min_hours;
     this.max_hours       = max_hours;
@@ -48,3 +51,5 @@ class Requirement extends Base {
   }
 
 }
+
+module.exports = Requirement;

@@ -5,8 +5,12 @@
  * take: Integer, the minimum number of subrequirements to be satisfied
  * subrequirements: Array of subrequirements (requirements and courses)
  */
+
+Base = require('./base.js');
+
 class CheckedRequirement extends Base {
   constructor(name, min_hours, max_hours, take, subrequirements) {
+    super();
     this.name            = name;
     this.min_hours       = min_hours;
     this.max_hours       = max_hours;
@@ -60,3 +64,5 @@ class CheckedRequirement extends Base {
     return new CheckedRequirement(this.name + ", " + requirement.name, hours, subrequirements);
   }
 }
+
+module.exports = CheckedRequirement;

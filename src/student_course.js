@@ -4,8 +4,12 @@
  * hours: The number of credit hours the student receives
  * grade: The grade the student received
  */
+
+Base = require("./base.js");
+
 class StudentCourse extends Base {
   constructor(name, hours, grade) {
+    super();
     this.name  = name;
     this.hours = hours;
     this.grade = new Grade(grade);
@@ -31,3 +35,5 @@ class StudentCourse extends Base {
     return true;
   }
 }
+
+module.exports = StudentCourse;

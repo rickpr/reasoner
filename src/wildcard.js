@@ -1,5 +1,7 @@
+Base = require("./base.js");
 class Wildcard extends Base {
   constructor(code, match, min_number, max_number, min_hours, exclude) {
+    super();
     this.code       = code;
     this.match      = match;
     this.min_number = min_number;
@@ -8,3 +10,5 @@ class Wildcard extends Base {
     this.exclude    = exclude;
   }
 }
+
+module.exports = Wildcard;

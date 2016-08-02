@@ -1,0 +1,14 @@
+{
+  "name": "reasoner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rickpr/reasoner.git"
+  },
+  "description": "Reasoner for Serialized Stage",
+  "devDependencies": {
+    "browserify": "13.1.0",
+    "gulp": "3.9.1",
+    "gulp-header": "1.8.7",
+    "vinyl-source-stream": "1.1.0"
+  }
+}

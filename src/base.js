@@ -13,3 +13,5 @@ class Base {
     return courses.reduce((a, e) => a + e.abs, 0);
   }
 }
+
+module.exports = Base;

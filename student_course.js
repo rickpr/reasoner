@@ -1,5 +1,4 @@
 /* StudentCourse Class
- * A course that a student has taken
  * Attrubutes:
  * name: String, the name of the course
  * hours: The number of credit hours the student receives
@@ -9,12 +8,12 @@ class StudentCourse extends Base {
   constructor(name, hours, grade) {
     this.name  = name;
     this.hours = hours;
-    this.grade = grade;
+    this.grade = new Grade(grade);
   }
 
   // Check if this is the same as an API course
   simeq(course) {
-    return this.name == course.name;
+    return this.name == course.name && course.min_grade.preceq(this.grade);
   }
 
   // Used as an alias for hours, for polymorphism with merge method

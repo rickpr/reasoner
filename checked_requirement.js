@@ -46,7 +46,7 @@ class CheckedRequirement extends Base {
 
   // The merge (\merge) method. This is a binary operator.
   merge(requirement) {
-                        // Hours in this set or sum of course hours
+    // Hours in this set or sum of course hours
     hours = Math.min(Math.min(this.abs, abs(setminus(requirement))) + 
         // Hours in the peer set or sum of course hours
         Math.min(requirement.hours, abs(requirement.setminus(this))) +

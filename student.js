@@ -13,13 +13,15 @@ class Student extends Base {
   // Get the courses that are in common with a requirement
   cap(requirement) {
     return courses.filter(course => 
-        requirement.subrequirements.map(c => c.name).includes(course.name) && 
+        requirement.subrequirements.map(c => course.simeq(c)) &&
         requirement.min_grade.preceq(course.grade)
         );
   }
 
   // Check if the student satisfied a requirement
   vdash(requirement) {
-    requirements.reduce((a, e) => a.merge(e), CheckedRequirement.new('merge', 0, 0, 'F', 0, []));
+    requirements.reduce(
+        (a, e) => a.merge(e), CheckedRequirement.new('merge', 0, 0, 'F', 0, [])
+    );
   }
 }

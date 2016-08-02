@@ -4,9 +4,9 @@
  * order: Integer, where this ranks in the partially ordered set
  */
 class Grade {
-  constructor(letter, order) {
+  constructor(letter) {
     this.letter = letter;
-    this.order  = order;
+    this.order  = GradeOrder[order] || 0;
   }
 
   // Compare this to see if requirement's grade precedes the student's grade

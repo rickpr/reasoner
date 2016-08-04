@@ -18,6 +18,13 @@ class CheckedRequirement extends Base {
     this.subrequirements = subrequirements;
   }
 
+  /* The algorithm specifies a need to know whether or not a requirement is
+   * ``basic''. This means that every subrequirement is a course.
+  get basic() {
+    return this.subs.every(sub => sub.type == 'Course');
+  }
+  */
+
   // How many subrequirements did the student satisfy?
   get taken() {
     return this.subrequirements.filter(sub => sub.satisfied).length;
@@ -30,7 +37,7 @@ class CheckedRequirement extends Base {
 
   // Is this requirement satisfied (represented as \vdash)?
   get satisfied() {
-    return this.taken;
+    return this.taken >= this.take && this.hours >= this.min_hours;
   }
 
   // The courses in this set, but not the other set (name ``requirement'')
@@ -57,12 +64,30 @@ class CheckedRequirement extends Base {
         // Hours in courses that are in both
         abs(cap(requirement)),
         // Sum of nominal hours of both requirements.
-        this.hours + requirement.hours);
+        this.max_hours + requirement.max_hours);
     // Subrequirements now has courses from both
     subrequirements = cup(requirement);
     // Return the new requirement (probably going to keep merging)
-    return new CheckedRequirement(this.name + ", " + requirement.name, hours, subrequirements);
+    replacement = new CheckedRequirement(this.name + ", " + requirement.name, hours, hours, subrequirements);
+    replacement.hours = hours;
+    return replacement;
   }
+
+  // Now that the unused courses have been filtered, reduce
+  reason() {
+    // Reason each one
+    replacement = subrequirements.map(sub => sub.reason())
+      // Keep the satisfied ones
+      .filter(sub => sub.satisfied)
+      // Merge
+      .reduce((acc, sub) => acc.merge(sub));
+    return replacement;
+  }
+
+  check() {
+    reasoned = reason();
+  }
+
 }
 
 module.exports = CheckedRequirement;

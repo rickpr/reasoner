@@ -24,9 +24,8 @@ class Student extends Base {
 
   // Check if the student satisfied a requirement
   vdash(requirement) {
-    requirements.reduce(
-        (a, e) => a.merge(e), CheckedRequirement.new('merge', 0, 0, 'F', 0, [])
-    );
+    tree = requirement.vdash(student).reason();
+    return tree.satisfied;
   }
 }
 

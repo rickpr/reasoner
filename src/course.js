@@ -20,12 +20,15 @@ class Course extends Base {
    * is satisfied.
    */
   vdash(student) {
-    if(!(student_course = student.courses.find(course => course.simeq(this))))
-      return this.satisfied = false;
-    this.hours     = student_course.hours;
-    this.grade     = student_course.grade;
-    this.satisifed = true;
-    return this;
+    replacement = new CheckedRequirement(this.name, this.min_hours, this.max_hours, 1);
+    if(!(student_course = student.courses.find(course => course.simeq(this)))) {
+      replacement.satisfied = false;
+    } else {
+      replacement.hours           = student_course.hours;
+      replacement.subrequirements = [student_course];
+      replacement.satisifed       = true;
+    }
+    return replacement;
   }
 
 }

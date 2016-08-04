@@ -39,14 +39,15 @@ class Requirement extends Base {
     return this.subrequirements.filter(sub => sub.type == 'Requirement');
   }
 
-  /* This is the satisfy method specified in the algorithm. Return either a
-   * CheckedRequirement ob */
+  /* This is the satisfy method specified in the algorithm. Return a
+   * CheckedRequirement.
+   */
   vdash(student) {
-    replacement = new CheckedRequirement(
+    return new CheckedRequirement(
         this.name,
         this.min_hours, 
         this.max_hours, 
-        this.subrequirements.map(sub => sub.vdash(student)).filter(Boolean)
+        this.subrequirements.map(sub => sub.vdash(student))
     );
   }
 
